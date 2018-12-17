@@ -1,0 +1,217 @@
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+td {
+	padding-left: 10px;
+	padding-right: 10px;
+}		
+
+#map { 
+	margin-left : 50px;
+	height: 100%;
+	z-index : 1;
+}
+
+.blues {
+	color: #6199C0;
+	font-family: serif;
+	font-size: 16pt;
+}
+
+.line {
+	float : left;
+	margin : 10%;
+	padding : 5%;
+	width : 70%;
+	background : #fff;
+}
+
+.viewInf:hover {
+	cursor: pointer;
+	text-shadow: rgba(255,255,255,0.5) 0 0 12px; 
+}
+
+.menu { 
+	position : fixed;
+	top : 0;
+	width : 400px;
+	height : 100%;
+	z-index : 2;
+	min-width : 50px;
+	transition: all 0.5s ease-in-out;
+	transform : translateX(-340px);
+}	
+
+.lines {
+	margin-top : 7px;
+	margin-bottom : 5px;
+	margin-left : 11px;
+	width : 60%;
+	height : 3px;
+	background : #fff;
+}
+
+.btn {
+	width : 60px;
+	height : 42px;
+	padding-top : 3px;
+	float : right;
+}
+
+.btn:hover {
+	cursor : pointer;
+	background: rgba(255,255,255,0.3); 
+}
+
+.rightForm {
+	width : 50px;
+	height : 100%;
+	float : right;
+	background : #123248;
+}
+
+.form {
+	width : 350px;
+	height : 100%;
+	padding-top : 70px;
+	background : #123248;
+	text-align: center;
+}
+
+.menu.in {
+	transform : none;
+}
+
+nav {
+	margin-bottom: 20px; 
+}
+
+nav ul {
+	margin-top: -20px;
+	font-size: 18px; 
+}
+
+nav ul li {
+	/*margin-right: 5px;
+	display: inline-block; */
+	list-style-type: none;
+}
+
+nav ul li span{
+	text-decoration: none;
+	color: white; 
+	border: 1px solid rgba(255,255,255,0.3); 
+	padding: .6em;
+	transition: 0.2s;
+	border-radius: 1px;
+}
+
+nav ul li span:hover {
+	cursor : pointer;
+	background: rgba(255,255,255,0.2);
+}
+
+.texts {
+	color : white;
+}
+
+.tbl_div{
+	color : white;
+	font-size: 17px;
+}
+
+#vipad-1 .tbl_div {
+	padding-top: 30px;
+}
+
+.tbl_div td {
+	padding : 5px;
+	width : 100%;
+}
+
+label {
+	cursor : pointer;
+}
+
+label:hover {
+	color : #6199C0;
+}
+
+.coord{
+	width : 135px;
+}
+
+.btn_result{
+	width : 135px;
+}
+
+.div_border {
+	border: 2px solid #fff; 
+    border-radius: 5px; 
+	margin-bottom : 10px;
+}
+
+a.button8 {
+	display: inline-block;
+	color: white;
+	font-weight: 700;
+	text-decoration: none;
+	user-select: none;
+	padding: .6em;
+	outline: none;
+	border: 1px solid rgba(255,255,255,0.3);
+	border-radius: 1px;
+	transition: 0.2s;
+	margin-right: 10px;
+} 
+a.button8:hover { 
+	background: rgba(255,255,255,0.2); 
+	cursor: pointer;
+}
+
+a.button8:active { 
+	background: white; 
+}
+
+input[type="checkbox"] {
+    display:none;
+}
+
+input[type="checkbox"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url(../img/check_radio_sheet.png) left top no-repeat;
+    cursor:pointer;
+}
+
+input[type="checkbox"]:checked + label span {
+    background:url(../img/check_radio_sheet.png) -19px top no-repeat;
+}
+
+.inform {
+	color: white;
+	text-decoration: none;
+	user-select: none;
+	outline: none;
+	border-bottom: 1px solid rgba(255,255,255,0.3);
+	transition: 0.2s;
+	padding: .3em .1em;
+	margin-top: 25px;
+	width: 297px;
+}
+
+.inform:hover {
+	background: rgba(255,255,255,0.2); 
+	cursor: pointer;
+}
+
+#infoRout {
+	position: absolute;
+	top: 15%;
+}

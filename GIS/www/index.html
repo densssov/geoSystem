@@ -1,0 +1,176 @@
+<html>
+	<head>
+		<link rel = "stylesheet" type = "text/css" href = "map.css"> 	
+		<script async defer src="../js/map.js"></script>
+		<script src="../js/jquery.js" type="text/javascript"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQmckHkX4_3bf-OqGEiUfpq0JS5tNhRlI&callback=initMap"
+			type="text/javascript"></script>
+		
+	</head>
+	<body>
+		<div id="map"></div>
+		<div id="menu" class="menu">
+			<div class="rightForm">
+				<div id="btn" class="btn">
+					<div class="lines"></div>
+					<div class="lines"></div>
+					<div class="lines"></div>
+				</div>
+			</div>			
+			<div class="form">
+				<nav>
+					<div class="inner">
+						<ul>
+							<li><span onclick="toggle('#vipad-1');">Выбрать маршрут</span></li>
+							<li style="margin-top:35px;"><span style="padding-left:16px; padding-right:17px;" onclick="toggle('#vipad-2');">Проложить путь</span></li>
+							<hr style="margin-top:30px; width: 280px; border-bottom:0px; border-color:rgba(255,255,255,0.3);" >
+							
+							<div id="vipad-1" class="texts">
+								<table class="tbl_div">
+									<tr>
+										<td>
+											<input type="checkbox" name="avtb18" id="1" onclick="routs(1, 18, 1);"/>
+											<label for="1"><span></span>Автобусный маршрут 18</label>
+										</td>
+									</tr>	
+									<tr>	
+										<td>
+											<input type="checkbox" name="avtb021" id="2" onclick="routs(2, 21, 1);"/>
+											<label for="2"><span></span>Автобусный маршрут 021</label>
+										</td>
+									</tr>
+									<tr>	
+										<td>
+											<input type="checkbox" name="troll7" id="3" onclick="routs(3, 7, 2);"/>
+											<label for="3"><span></span>Троллейбусный маршрут 7</label>
+										</td>
+									</tr>
+									<tr>	
+										<td>
+											<input type="checkbox" name="troll11" id="4" onclick="routs(4, 11, 2);"/>
+											<label for="4"><span></span>Троллейбусный маршрут 11</label>
+										</td>
+									</tr>
+									<tr>	
+										<td>
+											<input type="checkbox" name="tram3" id="5" onclick="routs(5, 3, 3);"/>
+											<label for="5"><span></span>Трамвайный маршрут 3</label>
+										</td>
+									</tr>
+									<tr>	
+										<td>
+											<input type="checkbox" name="tram22" id="6" onclick="routs(6, 22, 3);"/>
+											<label for="6"><span></span>Трамвайный маршрут 22</label>
+										</td>
+									</tr>
+									<tr>	
+										<td>
+											<input type="checkbox" name="metro" id="7" onclick="routs(7, 1, 4);"/>
+											<label for="7"><span></span>Метрополитен</label>
+										</td>
+									</tr>
+								</table>
+							</div>
+							
+							<div id="vipad-2" class="texts" style="position: absolute;right : 50px; left : 50px;">
+								<div>
+									<p>Выберите начальную и конечную точку на карте</p>
+								</div>
+								<div>
+									<a class="button8" style="padding-left: 33px; padding-right: 34px;" onclick="start();">Построить</a>
+								</div>
+								<div style="margin-top:10px;">
+									<a style="width:104px;	padding-left: 25px; padding-right: 26px;" class="button8" onclick="clears();">Очистить</a>
+								</div>
+								<div id="infoRout">
+								
+								</div>
+							</div>
+							<div id="vipad-3" class="texts" style="position: absolute;right : 50px; left : 50px;">
+								
+							</div>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+// Скрыть div
+$("div[id*='vipad-']").hide();   
+	
+var click = document.getElementById("btn");
+
+click.addEventListener("click", function() {
+	var menu = document.getElementById("menu");
+
+	if(menu.classList.contains("in")) {
+		menu.classList.remove("in");
+	} else {
+		menu.classList.add("in");
+	}
+}, false);
+
+function toggle(objName) {
+	console.log(flag_vipad);
+	if(flag_vipad != '#vipad-2') {
+		if(objName == '#vipad-2') flag = 1;
+		flag_vipad = objName;
+	} else {
+		flag = 0;
+		flag_vipad = "";
+	}
+	
+    var obj = $(objName),
+        blocks = $("div[id*='vipad-']");
+	
+	console.log(obj.css("display"));
+	
+    if (obj.css("display") != "none") {
+        obj.animate({ height: 'hide' }, 200);
+    } else {
+        var visibleBlocks = $("div[id*='vipad-']:visible");
+        if (visibleBlocks.length < 1) {
+            obj.animate({ height: 'show' }, 400);
+        } else {
+            $(visibleBlocks).animate({ height: 'hide' }, 200, function() {
+                obj.animate({ height: 'show' }, 400);
+            });            
+        }  
+    }
+	
+	for(var i = 1; i < 8; i++) {
+		if($("#"+i).prop("checked")) { 
+			$("#"+i).attr("checked", false);
+			routs(i, 0, 0);
+		}
+	}
+	clears();
+	//$('#infoRout').empty();
+	
+	/*var display = document.getElementById('vipad-2').style.display;
+	if(display == "block") flag = 1;
+	else flag = 0;*/
+	//console.log(flag);
+}	
+
+function marhToggle(objName) {
+	otherPath(objName);
+    var obj = $("#path-"+objName),
+        blocks = $("div[id*='path-']");
+    
+    if (obj.css("display") != "none") {
+        obj.animate({ height: 'hide' }, 200);
+    } else {
+        var visibleBlocks = $("div[id*='path-']:visible");
+        if (visibleBlocks.length < 1) {
+            obj.animate({ height: 'show' }, 400);
+        } else {
+            $(visibleBlocks).animate({ height: 'hide' }, 200, function() {
+                obj.animate({ height: 'show' }, 400);
+            });            
+        }  
+    }
+}	
+</script>
